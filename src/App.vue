@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-    <h1>Todo List</h1>
     <todo-list/>
+    <div class="footer">
+      <p>(C) green</p>
+    </div>
   </div>
 </template>
 
@@ -17,4 +19,29 @@ export default {
 </script>
 
 <style>
+* {
+  box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+#app {
+  height: 100%;
+  width: 100%;
+}
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 30px;
+  background: #222222;
+  color: #eeeeee;
+}
+.footer p {
+  margin: 0;
+  font-size: small;
+  padding-left: 15px;
+}
 </style>
