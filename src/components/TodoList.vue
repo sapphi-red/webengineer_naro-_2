@@ -2,9 +2,7 @@
   <div class="todo-list">
     <h1>Todo List</h1>
     <div class="todos">
-      <div class="todo" v-for="todo in todos" :key="todo.name">
-        <div class="name">{{ todo.name }}</div>
-      </div>
+      <todo v-for="todo in todos" :key="todo.name" :model="todo"/>
     </div>
     <div class="menu">
       <label>
@@ -16,8 +14,13 @@
 </template>
 
 <script>
+import Todo from "./Todo.vue";
+
 export default {
   name: "TodoList",
+  components: {
+    Todo
+  },
   data() {
     return {
       todos: [],
