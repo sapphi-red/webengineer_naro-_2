@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <todo-list/>
+    <todo-list />
     <div class="footer">
       <p>(C) green</p>
     </div>
@@ -22,7 +22,8 @@ export default {
 * {
   box-sizing: border-box;
 }
-html, body {
+html,
+body {
   height: 100%;
   width: 100%;
   margin: 0;

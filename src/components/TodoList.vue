@@ -2,8 +2,20 @@
   <div class="todo-list">
     <h1>Todo List</h1>
     <div class="list-selector">
-      <div class="list-type" :class="{selected: isPendingShown}" @click="changeShownListType(TodoStatus.PENDING)">未完了</div>
-      <div class="list-type" :class="{selected: isDoneShown}" @click="changeShownListType(TodoStatus.DONE)">完了</div>
+      <div
+        class="list-type"
+        :class="{ selected: isPendingShown }"
+        @click="changeShownListType(TodoStatus.PENDING)"
+      >
+        未完了
+      </div>
+      <div
+        class="list-type"
+        :class="{ selected: isDoneShown }"
+        @click="changeShownListType(TodoStatus.DONE)"
+      >
+        完了
+      </div>
     </div>
     <div class="todos">
       <todo
@@ -19,7 +31,7 @@
         <p v-if="isNewTodoContentDuplicated">ほかのTodoと重複しています。</p>
       </div>
       <label>
-        <input type="text" v-model="newTodoContent" placeholder="内容">
+        <input type="text" v-model="newTodoContent" placeholder="内容" />
       </label>
       <button @click="addTodo">追加</button>
     </div>
@@ -42,7 +54,7 @@ export default {
       shownListType: TodoStatus.PENDING,
       newTodoContent: "",
       isNewTodoContentEmpty: false,
-      isNewTodoContentDuplicated: false,
+      isNewTodoContentDuplicated: false
     };
   },
   methods: {
@@ -55,7 +67,7 @@ export default {
 
       this.todos.push({
         content: this.newTodoContent,
-        status: TodoStatus.PENDING,
+        status: TodoStatus.PENDING
       });
       this.newTodoContent = "";
     },
@@ -70,8 +82,10 @@ export default {
     },
     updateValidation() {
       this.isNewTodoContentEmpty = this.newTodoContent === "";
-      this.isNewTodoContentDuplicated = this.todos.some(todo => todo.content === this.newTodoContent);
-    },
+      this.isNewTodoContentDuplicated = this.todos.some(
+        todo => todo.content === this.newTodoContent
+      );
+    }
   },
   computed: {
     shownTodos() {
@@ -85,8 +99,8 @@ export default {
     },
     isNewTodoContentError() {
       return this.isNewTodoContentEmpty || this.isNewTodoContentDuplicated;
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -111,12 +125,12 @@ h1 {
 .list-type {
   flex: 1 0;
   padding: 5px;
-  background: rgba(0,0,0,.1);
+  background: rgba(0, 0, 0, 0.1);
   text-align: center;
   cursor: pointer;
 }
 .list-type.selected {
-  background: rgba(0,0,0,.2);
+  background: rgba(0, 0, 0, 0.2);
   border-style: solid;
   border-width: 1px;
 }
@@ -124,15 +138,15 @@ h1 {
   flex: 1 0;
   width: 100%;
   margin: 15px 0;
-  background: rgba(0,0,0,.3);
+  background: rgba(0, 0, 0, 0.3);
   overflow-x: hidden;
   overflow-y: scroll;
 }
 .todo {
-  background: rgba(255,255,255,.7);
+  background: rgba(255, 255, 255, 0.7);
   border-style: solid;
   border-width: 2px;
-  border-color: rgba(0,0,0,.1);
+  border-color: rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   padding: 2px 5px;
   margin: 5px;
@@ -145,10 +159,10 @@ h1 {
   width: 100%;
   padding: 10px;
   margin-top: 10px;
-  background: rgba(0,0,0,.2);
+  background: rgba(0, 0, 0, 0.2);
   border-style: solid;
   border-width: 2px;
-  border-color: rgba(0,0,0,.5);
+  border-color: rgba(0, 0, 0, 0.5);
   border-radius: 5px;
 }
 .menu .error {

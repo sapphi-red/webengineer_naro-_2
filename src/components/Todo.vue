@@ -1,8 +1,20 @@
 <template>
   <div class="todo">
     <div class="content">{{ model.content }}</div>
-    <button class="button-done" v-if="isPending" @click="$emit('changeStatus', model, TodoStatus.DONE)">完了</button>
-    <button class="button-delete" v-if="isDone" @click="$emit('changeStatus', model, TodoStatus.DELETED)">削除</button>
+    <button
+      class="button-done"
+      v-if="isPending"
+      @click="$emit('changeStatus', model, TodoStatus.DONE)"
+    >
+      完了
+    </button>
+    <button
+      class="button-delete"
+      v-if="isDone"
+      @click="$emit('changeStatus', model, TodoStatus.DELETED)"
+    >
+      削除
+    </button>
   </div>
 </template>
 
@@ -13,11 +25,11 @@ export default {
   name: "Todo",
   data() {
     return {
-      TodoStatus,
-    }
+      TodoStatus
+    };
   },
   props: {
-    model: Object,
+    model: Object
   },
   methods: {},
   computed: {
@@ -34,10 +46,10 @@ export default {
 <style>
 .todo {
   display: flex;
-  background: rgba(0,0,0,.1);
+  background: rgba(0, 0, 0, 0.1);
   border-style: solid;
   border-width: 2px;
-  border-color: rgba(0,0,0,.1);
+  border-color: rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   padding: 2px 5px;
   margin: 5px;
