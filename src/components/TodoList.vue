@@ -92,17 +92,21 @@ export default {
 
 <style>
 h1 {
-  margin: 10px;
+  margin: 0;
 }
 .todo-list {
   display: flex;
   flex-direction: column;
+  align-items: center;
   height: calc(100% - 30px);
+  padding: 15px;
 }
 .list-selector {
   display: flex;
   flex: 0 0;
-  margin: 10px;
+  width: 100%;
+  max-width: 600px;
+  margin: 10px 0;
 }
 .list-type {
   flex: 1 0;
@@ -113,10 +117,13 @@ h1 {
 }
 .list-type.selected {
   background: rgba(0,0,0,.2);
+  border-style: solid;
+  border-width: 1px;
 }
 .todos {
   flex: 1 0;
-  margin: 15px;
+  width: 100%;
+  margin: 15px 0;
   background: rgba(0,0,0,.3);
   overflow-x: hidden;
   overflow-y: scroll;
@@ -135,8 +142,9 @@ h1 {
   flex-wrap: wrap;
   justify-content: flex-end;
   flex: 0 0;
+  width: 100%;
   padding: 10px;
-  margin: 10px 20px 10px;
+  margin-top: 10px;
   background: rgba(0,0,0,.2);
   border-style: solid;
   border-width: 2px;
