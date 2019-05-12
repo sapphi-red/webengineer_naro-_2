@@ -1,6 +1,6 @@
 <template>
   <div class="todo">
-    <div class="name">{{ model.name }}</div>
+    <div class="content">{{ model.content }}</div>
     <button class="button-done" @click="$emit('changeState', model, TodoStatus.DONE)">done</button>
   </div>
 </template>
@@ -33,7 +33,7 @@ export default {
   padding: 2px 5px;
   margin: 5px;
 }
-.name {
+.content {
   flex: 1 1;
   word-break: break-all;
   word-break: break-word;

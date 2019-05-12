@@ -4,14 +4,14 @@
     <div class="todos">
       <todo
         v-for="todo in pendingTodos"
-        :key="todo.name"
+        :key="todo.content"
         :model="todo"
         @changeState="changeTodoState"
       />
     </div>
     <div class="menu">
       <label>
-        <input type="text" v-model="newTodoName" placeholder="内容">
+        <input type="text" v-model="newTodoContent" placeholder="内容">
       </label>
       <button @click="addTodo">追加</button>
     </div>
@@ -30,16 +30,16 @@ export default {
   data() {
     return {
       todos: [],
-      newTodoName: "",
+      newTodoContent: "",
     };
   },
   methods: {
     addTodo() {
       this.todos.push({
-        name: this.newTodoName,
+        content: this.newTodoContent,
         status: TodoStatus.PENDING,
       });
-      //this.newTodoName = "";
+      //this.newTodoContent = "";
     },
     changeTodoState(todo, newState) {
       todo.status = newState;
