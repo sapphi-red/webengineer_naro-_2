@@ -117,11 +117,12 @@ h1 {
 .todos {
   flex: 1 0;
   margin: 15px;
+  background: rgba(0,0,0,.3);
   overflow-x: hidden;
   overflow-y: scroll;
 }
 .todo {
-  background: rgba(0,0,0,.1);
+  background: rgba(255,255,255,.7);
   border-style: solid;
   border-width: 2px;
   border-color: rgba(0,0,0,.1);
