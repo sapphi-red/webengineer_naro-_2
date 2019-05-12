@@ -39,7 +39,7 @@ export default {
         content: this.newTodoContent,
         status: TodoStatus.PENDING,
       });
-      //this.newTodoContent = "";
+      this.newTodoContent = "";
     },
     changeTodoState(todo, newState) {
       todo.status = newState;
