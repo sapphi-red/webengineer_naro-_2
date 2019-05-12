@@ -1,7 +1,7 @@
 <template>
   <div class="todo">
     <div class="content">{{ model.content }}</div>
-    <button class="button-done" @click="$emit('changeState', model, TodoStatus.DONE)">done</button>
+    <button class="button-done" @click="$emit('changeState', model, TodoStatus.DONE)">完了</button>
   </div>
 </template>
 
