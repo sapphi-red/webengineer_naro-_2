@@ -109,6 +109,7 @@ h1 {
   padding: 5px;
   background: rgba(0,0,0,.1);
   text-align: center;
+  cursor: pointer;
 }
 .list-type.selected {
   background: rgba(0,0,0,.2);
@@ -163,5 +164,6 @@ h1 {
   flex: 0 0;
   margin-left: 10px;
   word-break: keep-all;
+  cursor: pointer;
 }
 </style>

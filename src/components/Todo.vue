@@ -50,5 +50,6 @@ export default {
 button {
   flex: 0 0;
   word-break: keep-all;
+  cursor: pointer;
 }
 </style>
