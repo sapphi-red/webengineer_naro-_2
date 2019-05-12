@@ -10,6 +10,10 @@
       />
     </div>
     <div class="menu">
+      <div class="error" v-if="isNewTodoContentError">
+        <p v-if="isNewTodoContentEmpty">内容を入力してください。</p>
+        <p v-if="isNewTodoContentDuplicated">ほかのTodoと重複しています。</p>
+      </div>
       <label>
         <input type="text" v-model="newTodoContent" placeholder="内容">
       </label>
@@ -31,10 +35,15 @@ export default {
     return {
       todos: [],
       newTodoContent: "",
+      isNewTodoContentEmpty: false,
+      isNewTodoContentDuplicated: false,
     };
   },
   methods: {
     addTodo() {
+      this.updateValidation();
+      if (this.isNewTodoContentError) return;
+
       this.todos.push({
         content: this.newTodoContent,
         status: TodoStatus.PENDING,
@@ -43,11 +52,18 @@ export default {
     },
     changeTodoState(todo, newState) {
       todo.status = newState;
-    }
+    },
+    updateValidation() {
+      this.isNewTodoContentEmpty = this.newTodoContent === "";
+      this.isNewTodoContentDuplicated = this.todos.some(todo => todo.content === this.newTodoContent);
+    },
   },
   computed: {
     pendingTodos() {
       return this.todos.filter(todo => todo.status === TodoStatus.PENDING);
+    },
+    isNewTodoContentError() {
+      return this.isNewTodoContentEmpty || this.isNewTodoContentDuplicated;
     },
   },
 };
@@ -89,6 +105,18 @@ h1 {
   border-width: 2px;
   border-color: rgba(0,0,0,.5);
   border-radius: 5px;
+}
+.menu .error {
+  flex: 1 0 100%;
+  padding: 5px;
+  margin-bottom: 5px;
+  background: #ddbbbb;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #cc3333;
+}
+.menu .error p {
+  margin: 0;
 }
 .menu label {
   flex: 1 1 300px;
