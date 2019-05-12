@@ -78,7 +78,27 @@ h1 {
   margin: 5px;
 }
 .menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   flex: 0 0;
-  margin: 0 30px 20px;
+  padding: 10px;
+  margin: 10px 20px 10px;
+  background: rgba(0,0,0,.2);
+  border-style: solid;
+  border-width: 2px;
+  border-color: rgba(0,0,0,.5);
+  border-radius: 5px;
+}
+.menu label {
+  flex: 1 1 300px;
+}
+.menu label input {
+  width: 100%;
+}
+.menu button {
+  flex: 0 0;
+  margin-left: 10px;
+  word-break: keep-all;
 }
 </style>
