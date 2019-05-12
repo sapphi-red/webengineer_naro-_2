@@ -1,9 +1,13 @@
 <template>
   <div class="todo-list">
     <h1>Todo List</h1>
+    <div class="list-selector">
+      <div class="list-type" :class="{selected: isPendingShown}" @click="changeShownListType(TodoStatus.PENDING)">未完了</div>
+      <div class="list-type" :class="{selected: isDoneShown}" @click="changeShownListType(TodoStatus.DONE)">完了</div>
+    </div>
     <div class="todos">
       <todo
-        v-for="todo in pendingTodos"
+        v-for="todo in shownTodos"
         :key="todo.content"
         :model="todo"
         @changeState="changeTodoState"
@@ -33,13 +37,18 @@ export default {
   },
   data() {
     return {
+      TodoStatus,
       todos: [],
+      shownListType: TodoStatus.PENDING,
       newTodoContent: "",
       isNewTodoContentEmpty: false,
       isNewTodoContentDuplicated: false,
     };
   },
   methods: {
+    changeShownListType(newType) {
+      this.shownListType = newType;
+    },
     addTodo() {
       this.updateValidation();
       if (this.isNewTodoContentError) return;
@@ -51,6 +60,12 @@ export default {
       this.newTodoContent = "";
     },
     changeTodoState(todo, newState) {
+      if (newState === TodoStatus.DELETED) {
+        const index = this.todos.indexOf(todo);
+        this.todos.splice(index, 1);
+        return;
+      }
+
       todo.status = newState;
     },
     updateValidation() {
@@ -59,8 +74,14 @@ export default {
     },
   },
   computed: {
-    pendingTodos() {
-      return this.todos.filter(todo => todo.status === TodoStatus.PENDING);
+    shownTodos() {
+      return this.todos.filter(todo => todo.status === this.shownListType);
+    },
+    isPendingShown() {
+      return this.shownListType === TodoStatus.PENDING;
+    },
+    isDoneShown() {
+      return this.shownListType === TodoStatus.DONE;
     },
     isNewTodoContentError() {
       return this.isNewTodoContentEmpty || this.isNewTodoContentDuplicated;
@@ -77,6 +98,20 @@ h1 {
   display: flex;
   flex-direction: column;
   height: calc(100% - 30px);
+}
+.list-selector {
+  display: flex;
+  flex: 0 0;
+  margin: 10px;
+}
+.list-type {
+  flex: 1 0;
+  padding: 5px;
+  background: rgba(0,0,0,.1);
+  text-align: center;
+}
+.list-type.selected {
+  background: rgba(0,0,0,.2);
 }
 .todos {
   flex: 1 0;

@@ -1,4 +1,5 @@
 export default {
   PENDING: "pending",
-  DONE: "done"
+  DONE: "done",
+  DELETED: "deleted"
 };
