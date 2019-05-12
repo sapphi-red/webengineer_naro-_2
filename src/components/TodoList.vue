@@ -10,7 +10,7 @@
         v-for="todo in shownTodos"
         :key="todo.content"
         :model="todo"
-        @changeState="changeTodoState"
+        @changeStatus="changeTodoStatus"
       />
     </div>
     <div class="menu">
@@ -59,14 +59,14 @@ export default {
       });
       this.newTodoContent = "";
     },
-    changeTodoState(todo, newState) {
-      if (newState === TodoStatus.DELETED) {
+    changeTodoStatus(todo, newStatus) {
+      if (newStatus === TodoStatus.DELETED) {
         const index = this.todos.indexOf(todo);
         this.todos.splice(index, 1);
         return;
       }
 
-      todo.status = newState;
+      todo.status = newStatus;
     },
     updateValidation() {
       this.isNewTodoContentEmpty = this.newTodoContent === "";
