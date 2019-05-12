@@ -1,21 +1,30 @@
 <template>
   <div class="todo">
-    <div class="name">{{ this.model.name }}</div>
+    <div class="name">{{ model.name }}</div>
+    <button class="button-done" @click="$emit('changeState', model, TodoStatus.DONE)">done</button>
   </div>
 </template>
 
 <script>
+import TodoStatus from "../TodoStatus.js";
+
 export default {
   name: "Todo",
+  data() {
+    return {
+      TodoStatus,
+    }
+  },
   props: {
     model: Object,
   },
-  methods: {}
+  methods: {},
 };
 </script>
 
 <style>
 .todo {
+  display: flex;
   background: rgba(0,0,0,.1);
   border-style: solid;
   border-width: 2px;
@@ -23,5 +32,13 @@ export default {
   border-radius: 5px;
   padding: 2px 5px;
   margin: 5px;
+}
+.name {
+  flex: 1 1;
+  word-break: break-all;
+  word-break: break-word;
+}
+button {
+  flex: 0 0;
 }
 </style>

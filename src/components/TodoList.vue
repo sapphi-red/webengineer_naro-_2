@@ -2,7 +2,12 @@
   <div class="todo-list">
     <h1>Todo List</h1>
     <div class="todos">
-      <todo v-for="todo in todos" :key="todo.name" :model="todo"/>
+      <todo
+        v-for="todo in pendingTodos"
+        :key="todo.name"
+        :model="todo"
+        @changeState="changeTodoState"
+      />
     </div>
     <div class="menu">
       <label>
@@ -15,6 +20,7 @@
 
 <script>
 import Todo from "./Todo.vue";
+import TodoStatus from "../TodoStatus.js";
 
 export default {
   name: "TodoList",
@@ -31,10 +37,19 @@ export default {
     addTodo() {
       this.todos.push({
         name: this.newTodoName,
+        status: TodoStatus.PENDING,
       });
       //this.newTodoName = "";
+    },
+    changeTodoState(todo, newState) {
+      todo.status = newState;
     }
-  }
+  },
+  computed: {
+    pendingTodos() {
+      return this.todos.filter(todo => todo.status === TodoStatus.PENDING);
+    },
+  },
 };
 </script>
 
