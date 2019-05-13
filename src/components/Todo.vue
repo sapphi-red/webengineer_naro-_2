@@ -1,9 +1,10 @@
 <template>
-  <div class="todo">
+  <div class="todo" :class="{ loading: model.waitingResponse }">
     <div class="content">{{ model.content }}</div>
     <button
       class="button-done"
       v-if="isPending"
+      :disabled="model.waitingResponse"
       @click="$emit('changeStatus', model, TodoStatus.DONE)"
     >
       完了
@@ -11,10 +12,12 @@
     <button
       class="button-delete"
       v-if="isDone"
+      :disabled="model.waitingResponse"
       @click="$emit('changeStatus', model, TodoStatus.DELETED)"
     >
       削除
     </button>
+    <div class="error" v-if="model.error">同期エラー</div>
   </div>
 </template>
 
@@ -46,6 +49,7 @@ export default {
 <style>
 .todo {
   display: flex;
+  flex-wrap: wrap;
   background: rgba(255, 255, 255, 0.7);
   border-style: solid;
   border-width: 2px;
@@ -53,6 +57,9 @@ export default {
   border-radius: 5px;
   padding: 2px 5px;
   margin: 5px;
+}
+.todo.loading {
+  opacity: 0.3;
 }
 .content {
   flex: 1 1;
@@ -63,5 +70,9 @@ button {
   flex: 0 0;
   word-break: keep-all;
   cursor: pointer;
+}
+.error {
+  width: 100%;
+  background: red;
 }
 </style>

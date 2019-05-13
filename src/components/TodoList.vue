@@ -39,8 +39,11 @@
 </template>
 
 <script>
+import API from "../API.js";
 import Todo from "./Todo.vue";
 import TodoStatus from "../TodoStatus.js";
+
+const api = new API("sappi-red");
 
 export default {
   name: "TodoList",
@@ -61,24 +64,53 @@ export default {
     changeShownListType(newType) {
       this.shownListType = newType;
     },
-    addTodo() {
+    async addTodo() {
       this.updateValidation();
       if (this.isNewTodoContentError) return;
 
-      this.todos.push({
+      const todo = {
+        id: this.newTodoContent,
         content: this.newTodoContent,
-        status: TodoStatus.PENDING
-      });
+        status: TodoStatus.PENDING,
+        waitingResponse: true
+      };
+
+      this.todos.push(todo);
       this.newTodoContent = "";
+
+      try {
+        await api.addTodo(todo);
+      } catch {
+        todo.error = true;
+      } finally {
+        todo.waitingResponse = false;
+      }
     },
-    changeTodoStatus(todo, newStatus) {
+    async changeTodoStatus(todo, newStatus) {
+      todo.status = newStatus;
+      todo.waitingResponse = true;
+
       if (newStatus === TodoStatus.DELETED) {
-        const index = this.todos.indexOf(todo);
-        this.todos.splice(index, 1);
+        try {
+          await api.deleteTodo(todo.id);
+
+          const index = this.todos.indexOf(todo);
+          this.todos.splice(index, 1);
+        } catch {
+          todo.error = true;
+        } finally {
+          todo.waitingResponse = false;
+        }
         return;
       }
 
-      todo.status = newStatus;
+      try {
+        await api.updateTodo(todo.id, todo);
+      } catch {
+        todo.error = true;
+      } finally {
+        todo.waitingResponse = false;
+      }
     },
     updateValidation() {
       this.isNewTodoContentEmpty = this.newTodoContent === "";
@@ -100,6 +132,10 @@ export default {
     isNewTodoContentError() {
       return this.isNewTodoContentEmpty || this.isNewTodoContentDuplicated;
     }
+  },
+  async created() {
+    const todos = await api.getTodos();
+    this.todos = todos;
   }
 };
 </script>
