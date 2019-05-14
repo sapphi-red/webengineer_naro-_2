@@ -46,7 +46,7 @@ export default {
 <style>
 .todo {
   display: flex;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.7);
   border-style: solid;
   border-width: 2px;
   border-color: rgba(0, 0, 0, 0.1);

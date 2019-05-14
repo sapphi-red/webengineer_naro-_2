@@ -142,15 +142,6 @@ h1 {
   overflow-x: hidden;
   overflow-y: scroll;
 }
-.todo {
-  background: rgba(255, 255, 255, 0.7);
-  border-style: solid;
-  border-width: 2px;
-  border-color: rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  padding: 2px 5px;
-  margin: 5px;
-}
 .menu {
   display: flex;
   flex-wrap: wrap;
