@@ -71,6 +71,9 @@ button {
   word-break: keep-all;
   cursor: pointer;
 }
+button[disabled] {
+  cursor: not-allowed;
+}
 .error {
   width: 100%;
   background: red;
