@@ -2,7 +2,7 @@
   <div id="app">
     <todo-list />
     <div class="footer">
-      <p>(C) green</p>
+      <p>(C) 翠(green) 2019-</p>
     </div>
   </div>
 </template>
